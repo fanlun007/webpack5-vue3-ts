@@ -1,10 +1,9 @@
 <template>
-  <div>about</div>
+  <div>about - {{ msg }}</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-  name: 'AboutPage',
-})
+<script lang="ts" setup>
+import { ref } from 'vue'
+
+const msg = ref('Hello world')
 </script>
