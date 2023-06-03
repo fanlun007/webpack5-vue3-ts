@@ -4,14 +4,18 @@
     <div>
       <svg-icon icon-class="menu-icon" class="menu-icon" />
     </div>
+    <MyButton />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineAsyncComponent, defineComponent } from 'vue'
 import { ElMessage } from 'element-plus'
 export default defineComponent({
   name: 'HomePage',
+  components: {
+    MyButton: defineAsyncComponent(() => import('remote_app/MyButton')),
+  },
   setup() {
     function fun() {
       ElMessage.success('消息')

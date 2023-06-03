@@ -5,6 +5,8 @@ const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const common = require('./webpack.base.conf')
 const chalk = require('chalk')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+// 引入moduleFed插件
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin');
 
 const devWebpackConfig = merge(common, {
   mode: 'development',
@@ -72,7 +74,7 @@ const devWebpackConfig = merge(common, {
         },
       ],
     },
-    port: 8080, // 端口号
+    port: 8081, // 端口号
     open: false, // 自动打开
     hot: true, // 热更新
     allowedHosts: 'all',
@@ -98,6 +100,12 @@ const devWebpackConfig = merge(common, {
       __VUE_OPTIONS_API__: true,
       __VUE_PROD_DEVTOOLS__: true,
     }),
+    new ModuleFederationPlugin({
+      //远程访问地址入口
+      remotes: {
+        "remote_app": "remote_app@http://localhost:8080/remoteEntry.js",
+      },
+    })
   ],
   // 缓存
   cache: {
